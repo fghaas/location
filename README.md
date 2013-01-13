@@ -12,11 +12,11 @@ do any sanity checking on the retrieved location information.
 
 By default, this module attempts to retrieve the node's location
 using the JSON service at http://freegeoip.net. This free service is
-limited to 100 requests from a single source IP per hour, so you
-should not use it it massively elastic or particularly large
-environments.
+limited to 1000 requests per hour, so you should not use it in
+massively elastic or particularly large environments.
 
-However, the software running FreeGeoIP is freely available on GitHub,
+However, the software running FreeGeoIP is freely available on
+[GitHub,](https://github.com/fiorix/freegeoip)
 enabling you to run your own geo-location web service if you so
 choose.
 
@@ -40,8 +40,12 @@ for the downloaded facts, you can do so as follows:
         filename => 'whereami.json'
     }
 
-Note that in order to be properly parsed by facter-dot-d,
+Note that in order to be properly parsed by `facter-dot-d`,
 Your `filename` must end in `.json`.
+
+Normally, the lookup will occur only once for every node.
+In order to purge and refresh a node's location information, delete
+the fact file and wait for the next agent run.
 
 License
 -------
